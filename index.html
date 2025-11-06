@@ -1,107 +1,462 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>늘봄 SyMind – See your Mind, Heal your Day</title>
   <script src="https://kit.fontawesome.com/e4013eb5f0.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#fbe5d6; --panel:#ffffff; --ink:#2a2a2a; --muted:#2a2a2a;
-      --brand:#3b7f6a; --brand-weak:#94c7b3; --accent:#e7b186; --accent-2:#e6d9c7; --danger:#d66a6a;
-      --radius:20px; --shadow:0 12px 24px rgba(14,7,7,.08); --shadow-soft:0 6px 16px rgba(0,0,0,.06); --maxw:1120px;
+    :root {
+      --bg: #fbe5d6;
+      --panel: #ffffff;
+      --ink: #2a2a2a;
+      --muted: #2a2a2a;
+      --brand: #3b7f6a;
+      --brand-weak: #94c7b3;
+      --accent: #e7b186;
+      --accent-2: #e6d9c7;
+      --danger: #d66a6a;
+      --radius: 20px;
+      --shadow: 0 12px 24px rgba(14, 7, 7, .08);
+      --shadow-soft: 0 6px 16px rgba(0, 0, 0, .06);
+      --maxw: 1120px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{margin:0; font-family:"Nunito",system-ui,-apple-system,Segoe UI,Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; color:var(--ink);
-      background:radial-gradient(1200px 600px at 50% -10%, #fff0e3 0%, transparent 60%), var(--bg);}
-    a{color:var(--brand); text-decoration:none}
-    .container{max-width:var(--maxw); margin:0 auto; padding:24px}
 
-    header{position:sticky; top:0; backdrop-filter:saturate(150%) blur(8px);
-      background:linear-gradient(180deg, rgba(251,229,215,.9), rgba(255,250,245,.6)); border-bottom:1px solid rgba(0,0,0,.04); z-index:50;}
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
-    .logo{display:flex; align-items:center; gap:12px}
-    .logo-badge{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--brand-weak), var(--accent)); box-shadow:var(--shadow-soft);
-      display:grid; place-items:center; font-weight:800; color:#fff}
-    .logo h1{font-size:18px; letter-spacing:.2px; margin:0}
-    .menu{display:flex; gap:20px; align-items:center}
-    .menu a{padding:10px 14px; border-radius:12px; color:var(--muted)}
-    .menu a.active,.menu a:hover{background:rgba(59,127,106,.08); color:var(--brand)}
-    .avatar{width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg, #ddd, #fff)}
+    * {
+      box-sizing: border-box
+    }
 
-    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; margin-top:18px}
-    .hero-card{background:linear-gradient(180deg, #ffffffcc, #ffffffa8),
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%2394c7b3" stop-opacity="0.15"/><stop offset="1" stop-color="%23e7b186" stop-opacity="0.15"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>');
-      padding:36px; border-radius:var(--radius); box-shadow:var(--shadow);}
-    .hero h2{font-size:32px; line-height:1.25; margin:0 0 8px}
-    .hero p{color:var(--muted); margin:0 0 16px}
+    html,
+    body {
+      height: 100%
+    }
 
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
-    .btn{padding:12px 18px; border-radius:14px; border:1px solid transparent; font-weight:700; cursor:pointer}
-    .btn-primary{background:var(--brand); color:#fff}
-    .btn-primary:hover{opacity:.95}
-    .btn-soft{background:rgba(59,127,106,.08); color:var(--brand)}
-    .btn-ghost{background:#fff; border-color:#eee; color:var(--ink)}
+    html {
+      scroll-behavior: smooth
+    }
 
-    .mini{display:grid; gap:12px; grid-template-columns:1fr; padding:8px}
-    .mini-card{background:var(--panel); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow-soft)}
+    body {
+      margin: 0;
+      font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 50% -10%, #fff0e3 0%, transparent 60%), var(--bg);
+    }
 
-    .stack{display:grid; gap:18px; grid-template-columns:1fr 1fr; margin-top:18px}
-    .card{background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
-    .card h3{margin:0 0 8px}
-    .hint{color:var(--muted); font-size:14px}
+    a {
+      color: var(--brand);
+      text-decoration: none
+    }
 
-    .emotions{display:flex; flex-wrap:wrap; gap:10px}
-    .pill{padding:10px 14px; border-radius:999px; background:rgba(0,0,0,.04); cursor:pointer; border:1px solid transparent; transition:all .2s}
-    .pill:hover{background:#fff; border-color:#eee}
-    .pill.active{background:rgba(231,177,134,.2); border-color:var(--accent)}
-    .pill[aria-pressed="true"]{outline:2px solid var(--accent)}
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 24px
+    }
 
-    textarea{width:100%; min-height:120px; padding:14px 16px; border-radius:16px; border:1px solid #eee; resize:vertical; font-family:inherit; font-size:16px; background:#fff}
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: saturate(150%) blur(8px);
+      background: linear-gradient(180deg, rgba(251, 229, 215, .9), rgba(255, 250, 245, .6));
+      border-bottom: 1px solid rgba(0, 0, 0, .04);
+      z-index: 50;
+    }
 
-    .chart{height:260px; border-radius:16px; background:linear-gradient(180deg, #ffffff, #f7f4ef); border:1px solid #eee; display:grid; place-items:center; color:var(--muted); position:relative}
-    .chart canvas{width:100%; height:100%; display:block; border-radius:16px}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
 
-    .chat{display:flex; flex-direction:column; gap:12px; max-height:360px; overflow:auto}
-    .bubble{max-width:80%; padding:12px 14px; border-radius:18px; box-shadow:var(--shadow-soft)}
-    .bot{background:linear-gradient(180deg, #f6fbf8, #ffffff); border:1px solid #e8efe9}
-    .me{background:linear-gradient(180deg, #fff, #fff); border:1px solid #eee; align-self:flex-end}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
 
-    footer{padding:36px 24px; color:var(--muted); text-align:center}
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-weak), var(--accent));
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #fff
+    }
 
-    @media (max-width:960px){ .hero{grid-template-columns:1fr} .stack{grid-template-columns:1fr} }
+    .logo h1 {
+      font-size: 18px;
+      letter-spacing: .2px;
+      margin: 0
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center
+    }
+
+    .menu a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: var(--muted)
+    }
+
+    .menu a.active,
+    .menu a:hover {
+      background: rgba(59, 127, 106, .08);
+      color: var(--brand)
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ddd, #fff)
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items: center;
+      margin-top: 18px
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, #ffffffcc, #ffffffa8),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%2394c7b3" stop-opacity="0.15"/><stop offset="1" stop-color="%23e7b186" stop-opacity="0.15"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>');
+      padding: 36px;
+      margin-bottom: 23px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      line-height: 1.25;
+      margin: 0 0 8px
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 0 0 16px
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      opacity: .95
+    }
+
+    .btn-soft {
+      background: rgba(59, 127, 106, .08);
+      color: var(--brand)
+    }
+
+    .btn-ghost {
+      background: #fff;
+      border-color: #eee;
+      color: var(--ink)
+    }
+
+    .mini {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      padding: 8px
+    }
+
+    .mini-card {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 18px
+    }
+
+    .card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px
+    }
+
+    .card h3 {
+      margin: 0 0 8px
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .emotions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .04);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all .2s
+    }
+
+    .pill:hover {
+      background: #fff;
+      border-color: #eee
+    }
+
+    .pill.active {
+      background: rgba(231, 177, 134, .2);
+      border-color: var(--accent)
+    }
+
+    .pill[aria-pressed="true"] {
+      outline: 2px solid var(--accent)
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid #eee;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 16px;
+      background: #fff
+    }
+
+    .chart {
+      height: 260px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff, #f7f4ef);
+      border: 1px solid #eee;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      position: relative
+    }
+
+    .chart canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px
+    }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 360px;
+      overflow: auto
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .bot {
+      background: linear-gradient(180deg, #f6fbf8, #ffffff);
+      border: 1px solid #e8efe9
+    }
+
+    .me {
+      background: linear-gradient(180deg, #fff, #fff);
+      border: 1px solid #eee;
+      align-self: flex-end
+    }
+
+    footer {
+      padding: 36px 24px;
+      color: var(--muted);
+      text-align: center
+    }
+
+    @media (max-width:960px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .stack {
+        grid-template-columns: 1fr
+      }
+    }
 
     /* Survey single panel */
-    .sv-card{padding:18px; border-radius:16px; background:#fff; box-shadow:var(--shadow)}
-    .sv-head{position:sticky; top:0; z-index:5; margin:-18px -18px 12px; padding:14px 18px; border-bottom:1px solid #eee;
-      background:linear-gradient(180deg, #ffffff, #fbf9f6); border-top-left-radius:16px; border-top-right-radius:16px;
-      display:flex; justify-content:space-between; align-items:center; gap:12px}
-    .sv-body{max-height:68vh; overflow:auto; overscroll-behavior:contain; padding-right:6px; border-radius:12px}
-    .sv-q{margin:12px 0 0; padding:14px; border:1px solid #eee; border-radius:12px; background:linear-gradient(180deg, #fff, #fbf8f2)}
-    .sv-q legend{font-weight:700; margin-bottom:10px}
-    .sv-scale{display:flex; flex-wrap:wrap; gap:10px}
-    .sv-scale label{display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #eee; border-radius:999px; background:#fff; box-shadow:var(--shadow-soft)}
-    .sv-scale input{accent-color:var(--brand)}
-    .sv-actions{display:flex; gap:10px}
-    .sv-bar{width:220px; height:8px; background:#eee; border-radius:999px; overflow:hidden}
-    .sv-bar>i{display:block; height:100%; width:0%; background:var(--brand)}
-    @media (max-width:960px){ .sv-bar{width:36vw} }
+    .sv-card {
+      padding: 18px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow)
+    }
 
-    .result-wrap{display:grid; place-items:center; height:240px; border:1px solid #eee; border-radius:16px; background:linear-gradient(180deg, #ffffff, #f7f4ef)}
-    .badge{display:inline-flex; align-items:center; gap:10px; padding:14px 18px; border-radius:999px; font-weight:800; letter-spacing:.2px}
-    .badge.ok{background:rgba(59,127,106,.12); color:var(--brand); border:1px solid rgba(59,127,106,.25)}
-    .badge.warn{background:rgba(214,106,106,.12); color:var(--danger); border:1px solid rgba(214,106,106,.25)}
-    .badge i{font-size:20px}
+    .sv-head {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: -18px -18px 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #eee;
+      background: linear-gradient(180deg, #ffffff, #fbf9f6);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px
+    }
+
+    .sv-body {
+      max-height: 68vh;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding-right: 6px;
+      border-radius: 12px
+    }
+
+    .sv-q {
+      margin: 12px 0 0;
+      padding: 14px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff, #fbf8f2)
+    }
+
+    .sv-q legend {
+      font-weight: 700;
+      margin-bottom: 10px
+    }
+
+    .sv-scale {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .sv-scale label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid #eee;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .sv-scale input {
+      accent-color: var(--brand)
+    }
+
+    .sv-actions {
+      display: flex;
+      gap: 10px
+    }
+
+    .sv-bar {
+      width: 220px;
+      height: 8px;
+      background: #eee;
+      border-radius: 999px;
+      overflow: hidden
+    }
+
+    .sv-bar>i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--brand)
+    }
+
+    @media (max-width:960px) {
+      .sv-bar {
+        width: 36vw
+      }
+    }
+
+    .result-wrap {
+      display: grid;
+      place-items: center;
+      height: 240px;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff, #f7f4ef)
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .2px
+    }
+
+    .badge.ok {
+      background: rgba(59, 127, 106, .12);
+      color: var(--brand);
+      border: 1px solid rgba(59, 127, 106, .25)
+    }
+
+    .badge.warn {
+      background: rgba(214, 106, 106, .12);
+      color: var(--danger);
+      border: 1px solid rgba(214, 106, 106, .25)
+    }
+
+    .badge i {
+      font-size: 20px
+    }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container nav">
       <div class="logo">
-        <div class="logo-badge">Nb</div><h1>늘봄 SyMind</h1>
+        <div class="logo-badge">Nb</div>
+        <h1>늘봄 SyMind</h1>
       </div>
       <nav class="menu">
         <a href="#" class="active" id="toHome">SyMind</a>
@@ -117,7 +472,7 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-card">
-        <h2>오늘 마음을 살피고,<br/>부드럽게 치유해요 🌿</h2>
+        <h2>오늘 마음을 살피고,<br />부드럽게 치유해요 🌿</h2>
         <p class="hint">See your Mind, Heal your Day · 스트레스 진단 · 감정일기 · 공감형 피드백</p>
         <div class="cta-row">
           <button class="btn btn-primary" id="btnStartSurvey">늘이 스트레스 예측진단 시작 ▶</button>
@@ -126,9 +481,15 @@
         </div>
       </div>
       <div class="mini">
-        <div class="mini-card"><strong>오늘의 팁</strong><p class="hint">3분 호흡: 4초 들숨 · 4초 멈춤 · 6초 날숨</p></div>
-        <div class="mini-card"><strong>마음 미션</strong><p class="hint">오늘 한 가지 작은 감사를 적어보세요.</p></div>
-        <div class="mini-card"><strong>리마인더</strong><p class="hint">오후 9시에 감정일기 알림 보내기</p></div>
+        <div class="mini-card"><strong>오늘의 팁</strong>
+          <p class="hint">3분 호흡: 4초 들숨 · 4초 멈춤 · 6초 날숨</p>
+        </div>
+        <div class="mini-card"><strong>마음 미션</strong>
+          <p class="hint">오늘 한 가지 작은 감사를 적어보세요.</p>
+        </div>
+        <div class="mini-card"><strong>리마인더</strong>
+          <p class="hint">오후 9시에 감정일기 알림 보내기</p>
+        </div>
       </div>
     </section>
 
@@ -146,7 +507,9 @@
           <button class="btn btn-primary" type="button" id="svSubmit">제출</button>
         </div>
       </div>
-      <div class="sv-body"><form id="svForm"></form></div>
+      <div class="sv-body">
+        <form id="svForm"></form>
+      </div>
     </section>
 
     <!-- 설문 결과 -->
@@ -174,7 +537,7 @@
           <button type="button" class="pill" data-emotion="당황" aria-pressed="false">당황 😳</button>
           <button type="button" class="pill" data-emotion="기쁨" aria-pressed="false">기쁨 😊</button>
         </div>
-        <input type="hidden" id="diaryEmotion" value="분노"/>
+        <input type="hidden" id="diaryEmotion" value="분노" />
 
         <textarea id="diaryText" placeholder="오늘 나의 마음은 …"></textarea>
 
@@ -189,10 +552,12 @@
 
       <div class="card">
         <h3>감정 트렌드 📈</h3>
-        <p class="hint">EWMA · LSTM(예정) 기반 흐름 — 현재는 EWMA 스무딩 라인</p>
-        <div class="chart" id="trendChart">
-          <canvas id="trendCanvas"></canvas>
+        <p class="hint">내 마음의 변화를 따라 흐르는 감정의 물결을 확인해 보아요</p>
+        <!-- 감정 라인 차트 영역 -->
+        <div class="line-wrap" style="width:100%;max-width:800px;margin:0 auto;">
+          <canvas id="emotionLine" height="260" aria-label="감정 변화 트랜드" role="img"></canvas>
         </div>
+
       </div>
     </section>
 
@@ -200,20 +565,43 @@
     <section id="dashboard" class="stack">
       <div class="card">
         <h3>TOP 8 주요 스트레스 요인 🔎</h3>
-        <p class="hint">SHAP / LIME로 설명가능성 분석</p>
-        <div class="chart">(레이더 차트 영역)</div>
+        <p class="hint">스트레스 요인의 원인과 영향을 확인해 보아요</p>
+        <div class="radar-wrap" style="width:100%;max-width:720px;margin:0 auto;">
+          <canvas id="stressRadar" height="320" aria-label="TOP 8 스트레스 요인 레이더 차트" role="img"></canvas>
+        </div>
       </div>
       <div class="card">
-        <h3>맞춤 힐링 피드백 ❤️</h3>
-        <p class="hint">호흡 · 언어 · 루틴 · 미션</p>
-        <div class="mini-card" style="margin-top:8px">
-          <p>🌱 오늘은 스스로에게 한마디 친절함을 선물해요.</p>
-          <ul class="hint" style="margin:8px 0 0 16px">
-            <li>Breath: 4-4-6 호흡 3회</li>
-            <li>Mind Note: 불안 생각을 한 문장으로 이름 붙이기</li>
-            <li>Mini Mission: 10분 산책</li>
-          </ul>
-        </div>
+        <div style="
+  background:#fffaf6; 
+  border-radius:20px; 
+  padding:32px; 
+  box-shadow:0 6px 18px rgba(0,0,0,.08); 
+  font-family:'Pretendard','Nunito',sans-serif; 
+  color:#2a2a2a; 
+  max-width:700px; 
+  margin:auto;
+">
+  <h2 style="margin:0 0 8px; font-weight:700; font-size:1.6rem;">맞춤 힐링 피드백 💗</h2>
+  <p style="margin:0 0 20px; color:#777; font-size:1rem;">호흡 · 언어 · 루틴 · 미션</p>
+
+  <div style="
+    background:#ffffff; 
+    border-left:6px solid #ffb6b9; 
+    border-radius:16px; 
+    padding:24px 28px; 
+    font-size:1.1rem; 
+    line-height:1.8;
+  ">
+    <p style="margin:0 0 16px; font-weight:600; font-size:1.2rem;">🌱 오늘은 스스로에게 한마디 친절함을 선물해요.</p>
+    <ul style="margin:0; padding-left:22px;">
+      <li><b>Breath:</b> 4-4-6 호흡 3회</li>
+      <li><b>Mind Note:</b> 불안 생각을 한 문장으로 이름 붙이기</li>
+      <li><b>Mini Mission:</b> 10분 산책</li>
+    </ul>
+  </div>
+</div>
+
+
       </div>
     </section>
 
@@ -228,7 +616,7 @@
         </div>
         <div class="cta-row" style="margin-top:12px">
           <input aria-label="chat input" placeholder="메시지를 입력하세요"
-                 style="flex:1; padding:12px 14px; border-radius:14px; border:1px solid #eee"/>
+            style="flex:1; padding:12px 14px; border-radius:14px; border:1px solid #eee" />
           <button class="btn btn-primary">전송</button>
           <button class="btn btn-soft">감정요약</button>
           <button class="btn btn-ghost">위로말</button>
@@ -237,7 +625,9 @@
     </section>
   </main>
 
-  <footer><div class="container">© 2025 Symind · See your Mind, Heal your Day</div></footer>
+  <footer>
+    <div class="container">© 2025 Symind · See your Mind, Heal your Day</div>
+  </footer>
 
   <script>
     /* ─────────────────────────────
@@ -268,12 +658,12 @@
       qs('#btnOpenChat')?.addEventListener('click', () => go('#chat'));
       qs('#toHome')?.addEventListener('click', (e) => { e.preventDefault(); go('#home'); });
 
-      form.innerHTML = ITEMS.map((t,i)=> {
-        const n=`q${i+1}`;
+      form.innerHTML = ITEMS.map((t, i) => {
+        const n = `q${i + 1}`;
         return `
           <fieldset class="sv-q">
-            <legend>${i+1}. ${t}</legend>
-            <div class="sv-scale" role="radiogroup" aria-label="${i+1}번">
+            <legend>${i + 1}. ${t}</legend>
+            <div class="sv-scale" role="radiogroup" aria-label="${i + 1}번">
               <label><input type="radio" name="${n}" value="1"> 전혀 아님</label>
               <label><input type="radio" name="${n}" value="2"> 아님</label>
               <label><input type="radio" name="${n}" value="3"> 중립</label>
@@ -283,259 +673,420 @@
           </fieldset>`;
       }).join('');
 
-      function progress(){
+      function progress() {
         const done = form.querySelectorAll('input[type="radio"]:checked').length;
-        const p = Math.round(100*done/TOTAL);
-        bar.style.width=p+'%'; pct.textContent=`${p}% 완료`;
+        const p = Math.round(100 * done / TOTAL);
+        bar.style.width = p + '%'; pct.textContent = `${p}% 완료`;
       }
       form.addEventListener('change', progress);
 
-      function collect(){
-        const data={};
-        for(let i=1;i<=TOTAL;i++){
-          const r=form.querySelector(`input[name="q${i}"]:checked`);
-          data[`q${i}`]= r? +r.value : null;
+      function collect() {
+        const data = {};
+        for (let i = 1; i <= TOTAL; i++) {
+          const r = form.querySelector(`input[name="q${i}"]:checked`);
+          data[`q${i}`] = r ? +r.value : null;
         }
         return data;
       }
 
-      function classify(data){
-        const vals = Object.values(data).filter(v=>v!=null);
-        if(!vals.length){ return {label:'결과 없음', stress:null, detail:'응답이 필요합니다.'}; }
-        const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
-        const stress = mean>=3.5;
-        return {label:stress?'Stress':'Non-Stress', stress, mean:Number(mean.toFixed(2)), answered:vals.length};
+      function classify(data) {
+        const vals = Object.values(data).filter(v => v != null);
+        if (!vals.length) { return { label: '결과 없음', stress: null, detail: '응답이 필요합니다.' }; }
+        const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+        const stress = mean >= 3.5;
+        return { label: stress ? 'Stress' : 'Non-Stress', stress, mean: Number(mean.toFixed(2)), answered: vals.length };
       }
 
-      function renderResult(res){
-        if(!res || res.stress===null){
-          resultChart.innerHTML='<div class="hint">아직 결과가 없습니다. 설문을 저장 또는 제출하면 결과가 표시됩니다.</div>';
+      function renderResult(res) {
+        if (!res || res.stress === null) {
+          resultChart.innerHTML = '<div class="hint">아직 결과가 없습니다. 설문을 저장 또는 제출하면 결과가 표시됩니다.</div>';
           return;
         }
-        const cls=res.stress?'warn':'ok';
-        const icon=res.stress?'<i class="fa-solid fa-triangle-exclamation"></i>':'<i class="fa-solid fa-leaf"></i>';
-        resultChart.innerHTML=`
+        const cls = res.stress ? 'warn' : 'ok';
+        const icon = res.stress ? '<i class="fa-solid fa-triangle-exclamation"></i>' : '<i class="fa-solid fa-leaf"></i>';
+        resultChart.innerHTML = `
           <div class="badge ${cls}" title="응답 ${res.answered}문항, 평균 ${res.mean}">
             ${icon}<span>${res.label}</span>
           </div>`;
       }
 
-      try{
-        const raw=localStorage.getItem(KEY);
-        if(raw){
-          const obj=JSON.parse(raw);
-          Object.entries(obj).forEach(([k,v])=>{
-            const el=form.querySelector(`input[name="${k}"][value="${v}"]`);
-            if(el) el.checked=true;
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (raw) {
+          const obj = JSON.parse(raw);
+          Object.entries(obj).forEach(([k, v]) => {
+            const el = form.querySelector(`input[name="${k}"][value="${v}"]`);
+            if (el) el.checked = true;
           });
           progress(); renderResult(classify(obj));
-        }else{ progress(); }
-      }catch(e){ progress(); }
+        } else { progress(); }
+      } catch (e) { progress(); }
 
-      document.getElementById('svSave').addEventListener('click', ()=>{
-        const payload=collect();
+      document.getElementById('svSave').addEventListener('click', () => {
+        const payload = collect();
         localStorage.setItem(KEY, JSON.stringify(payload));
-        const res=classify(payload); renderResult(res);
+        const res = classify(payload); renderResult(res);
         alert('임시저장 완료! 결과가 업데이트되었습니다.');
-        document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
       });
 
-      document.getElementById('svReset').addEventListener('click', ()=>{
-        if(confirm('모든 응답을 초기화할까요?')){
+      document.getElementById('svReset').addEventListener('click', () => {
+        if (confirm('모든 응답을 초기화할까요?')) {
           form.reset(); localStorage.removeItem(KEY); progress(); renderResult(null);
         }
       });
 
-      document.getElementById('svSubmit').addEventListener('click', ()=>{
-        const data=collect();
-        const miss=Object.values(data).filter(v=>v===null).length;
-        if(miss && !confirm(`미응답 ${miss}문항이 있습니다. 제출할까요?`)) return;
-        const res=classify(data); renderResult(res);
+      document.getElementById('svSubmit').addEventListener('click', () => {
+        const data = collect();
+        const miss = Object.values(data).filter(v => v === null).length;
+        if (miss && !confirm(`미응답 ${miss}문항이 있습니다. 제출할까요?`)) return;
+        const res = classify(data); renderResult(res);
         alert('제출 완료! 결과가 업데이트되었습니다.');
-        document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
       });
     })();
 
     /* ─────────────────────────────
-       🌼 감정일기 + 📈 트렌드 (신규)
+       🌼 감정일기 + 📈 트렌드 (EWMA 캔버스)
     ───────────────────────────── */
-    (function(){
-      const EMO_ORDER = ['분노','슬픔','불안','상처','당황','기쁨'];
-      const EMO_TO_NUM = { '분노':1,'슬픔':2,'불안':3,'상처':4,'당황':5,'기쁨':6 };
-      const STORAGE_KEY = 'nulbom_diary_entries_v1'; // [{date:'2025-11-06', emotion:'기쁨', text:'...'}]
+    (function () {
+      const EMO_TO_NUM = { '분노': 1, '슬픔': 2, '불안': 3, '상처': 4, '당황': 5, '기쁨': 6 };
+      const STORAGE_KEY = 'nulbom_diary_entries_v1';
 
       const $emotionHidden = document.getElementById('diaryEmotion');
-      const $emotionGroup  = document.getElementById('emotionGroup');
-      const $diaryText     = document.getElementById('diaryText');
-      const $saveBtn       = document.getElementById('diarySaveBtn');
-      const $aiBtn         = document.getElementById('aiAnalyzeBtn');
-      const $aiCard        = document.getElementById('aiResultCard');
+      const $emotionGroup = document.getElementById('emotionGroup');
+      const $diaryText = document.getElementById('diaryText');
+      const $saveBtn = document.getElementById('diarySaveBtn');
+      const $aiBtn = document.getElementById('aiAnalyzeBtn');
+      const $aiCard = document.getElementById('aiResultCard');
 
-      // 이모티콘(버튼) 선택 토글
-      $emotionGroup.querySelectorAll('.pill').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          $emotionGroup.querySelectorAll('.pill').forEach(b=>{
-            b.classList.remove('active'); b.setAttribute('aria-pressed','false');
+      // 감정 선택 토글
+      $emotionGroup.querySelectorAll('.pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          $emotionGroup.querySelectorAll('.pill').forEach(b => {
+            b.classList.remove('active'); b.setAttribute('aria-pressed', 'false');
           });
-          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+          btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
           $emotionHidden.value = btn.dataset.emotion;
         });
       });
 
-      // 저장: 날짜 중복 시 갱신
-      function loadEntries(){
-        try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-        catch(e){ return []; }
+      function loadEntries() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+        catch (e) { return []; }
       }
-      function saveEntries(arr){
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      }
-      function todayStr(){
-        const d=new Date();
-        const m=('0'+(d.getMonth()+1)).slice(-2);
-        const day=('0'+d.getDate()).slice(-2);
+      function saveEntries(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+      function todayStr() {
+        const d = new Date(); const m = ('0' + (d.getMonth() + 1)).slice(-2); const day = ('0' + d.getDate()).slice(-2);
         return `${d.getFullYear()}-${m}-${day}`;
       }
 
-      $saveBtn.addEventListener('click', ()=>{
+      $saveBtn.addEventListener('click', () => {
         const emotion = $emotionHidden.value;
         const text = ($diaryText.value || '').trim();
         const date = todayStr();
-        if(!emotion){ alert('감정을 선택해 주세요.'); return; }
+        if (!emotion) { alert('감정을 선택해 주세요.'); return; }
 
         let arr = loadEntries();
-        const i = arr.findIndex(e=>e.date===date);
+        const i = arr.findIndex(e => e.date === date);
         const item = { date, emotion, text };
-        if(i>=0){ arr[i]=item; } else { arr.push(item); }
-        // 최신 90개만 보관 (과도한 로컬 스토리지 방지)
-        if(arr.length>90) arr = arr.slice(arr.length-90);
+        if (i >= 0) { arr[i] = item; } else { arr.push(item); }
+        if (arr.length > 90) arr = arr.slice(arr.length - 90);
         saveEntries(arr);
 
         drawTrend(arr);
         alert('감정일기를 저장했어요.');
       });
 
-      // AI 감정 진단(간단 키워드 규칙, 없으면 현재 선택 사용)
-      function aiPredictEmotion(txt, fallback){
-        const t = (txt||'').toLowerCase();
-        const has = (kws)=>kws.some(k=>t.includes(k));
-        // 한글 키워드
-        if(/기쁘|행복|설렘|즐겁/.test(txt)) return '기쁨';
-        if(/불안|걱정|초조|긴장/.test(txt)) return '불안';
-        if(/분노|화나|짜증|열받/.test(txt)) return '분노';
-        if(/상처|속상|서운|섭섭/.test(txt)) return '상처';
-        if(/당황|황당|멘붕|어쩔/.test(txt)) return '당황';
-        if(/슬픔|슬프|우울|눈물/.test(txt)) return '슬픔';
-        // 영어(혹시 입력)
-        if(has(['happy','joy'])) return '기쁨';
-        if(has(['anxious','worry','nervous'])) return '불안';
-        if(has(['angry','rage'])) return '분노';
-        if(has(['hurt','wounded'])) return '상처';
-        if(has(['embarrass','confus'])) return '당황';
-        if(has(['sad','depress','blue'])) return '슬픔';
+      function aiPredictEmotion(txt, fallback) {
+        const t = (txt || '').toLowerCase();
+        const has = (kws) => kws.some(k => t.includes(k));
+        if (/기쁘|행복|설렘|즐겁/.test(txt)) return '기쁨';
+        if (/불안|걱정|초조|긴장/.test(txt)) return '불안';
+        if (/분노|화나|짜증|열받/.test(txt)) return '분노';
+        if (/상처|속상|서운|섭섭/.test(txt)) return '상처';
+        if (/당황|황당|멘붕|어쩔/.test(txt)) return '당황';
+        if (/슬픔|슬프|우울|눈물/.test(txt)) return '슬픔';
+        if (has(['happy', 'joy'])) return '기쁨';
+        if (has(['anxious', 'worry', 'nervous'])) return '불안';
+        if (has(['angry', 'rage'])) return '분노';
+        if (has(['hurt', 'wounded'])) return '상처';
+        if (has(['embarrass', 'confus'])) return '당황';
+        if (has(['sad', 'depress', 'blue'])) return '슬픔';
         return fallback || '기쁨';
       }
 
-      $aiBtn.addEventListener('click', ()=>{
+      $aiBtn.addEventListener('click', () => {
         const pick = aiPredictEmotion($diaryText.value, $emotionHidden.value);
-        $aiCard.style.display='inline-block';
+        $aiCard.style.display = 'inline-block';
         $aiCard.innerHTML = `
           <strong>AI 예측:</strong>
           <div style="display:inline-flex; align-items:center; gap:8px; margin-left:6px">
-            <span class="pill active" aria-pressed="true" style="cursor:default">${pick} ${emoIcon(pick)}</span>
+            <span class="pill active" aria-pressed="true" style="cursor:default">${pick} ${({ '분노': '😠', '슬픔': '😢', '불안': '😟', '상처': '😔', '당황': '😳', '기쁨': '😊' })[pick] || '🙂'}</span>
           </div>`;
       });
 
-      function emoIcon(e){
-        return ({'분노':'😠','슬픔':'😢','불안':'😟','상처':'😔','당황':'😳','기쁨':'😊'})[e] || '🙂';
-      }
-
-      /* ── 라인 차트: 최근 30개, EWMA(α=0.4) 스무딩 ── */
+      // ── EWMA 캔버스 트렌드 ──
       const $canvas = document.getElementById('trendCanvas');
       const ctx = $canvas.getContext('2d');
 
-      function getSize(){
+      function getSize() {
         const box = document.getElementById('trendChart').getBoundingClientRect();
         $canvas.width = Math.floor(box.width - 24);
         $canvas.height = Math.floor(box.height - 16);
       }
-
-      function ewma(arr, alpha=0.4){
-        const out=[]; let s=null;
-        for(const v of arr){
-          if(v==null){ out.push(s); continue; }
-          s = (s==null)? v : (alpha*v + (1-alpha)*s);
+      function ewma(arr, alpha = 0.4) {
+        const out = []; let s = null;
+        for (const v of arr) {
+          if (v == null) { out.push(s); continue; }
+          s = (s == null) ? v : (alpha * v + (1 - alpha) * s);
           out.push(s);
         }
         return out;
       }
 
-      function drawTrend(entries){
-        if(!ctx) return;
+      function drawTrend(entries) {
+        if (!ctx) return;
         getSize();
-        // 정렬(오래된→최신)
-        const data = (entries||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
-        const last = data.slice(-30); // 최근 30개
-        const labels = last.map(d=>d.date.slice(5)); // MM-DD
-        const rawVals = last.map(d=> EMO_TO_NUM[d.emotion] ?? null);
+        const data = (entries || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+        const last = data.slice(-30);
+        const rawVals = last.map(d => EMO_TO_NUM[d.emotion] ?? null);
         const vals = ewma(rawVals);
 
-        // 좌표계
-        const W=$canvas.width, H=$canvas.height, pad=28;
-        ctx.clearRect(0,0,W,H);
+        const W = $canvas.width, H = $canvas.height, pad = 28;
+        ctx.clearRect(0, 0, W, H);
 
-        // 그리드 & 축
-        ctx.strokeStyle='rgba(0,0,0,0.08)'; ctx.lineWidth=1;
-        for(let y=1;y<=6;y++){
-          const py = pad + (H-2*pad)*(1 - (y-1)/5); // 1~6 균등
-          ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(W-pad, py); ctx.stroke();
-          ctx.fillStyle='rgba(0,0,0,0.45)'; ctx.font='12px Nunito, sans-serif';
-          ctx.fillText(String(y), 8, py+4);
+        // grid & y labels 1..6
+        ctx.strokeStyle = 'rgba(0,0,0,0.08)'; ctx.lineWidth = 1;
+        for (let y = 1; y <= 6; y++) {
+          const py = pad + (H - 2 * pad) * (1 - (y - 1) / 5);
+          ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(W - pad, py); ctx.stroke();
+          ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.font = '12px Nunito, sans-serif';
+          ctx.fillText(String(y), 8, py + 4);
         }
 
-        // 라인
-        const n=vals.length;
-        if(n===0){ 
-          ctx.fillStyle='rgba(0,0,0,0.45)'; ctx.font='14px Nunito, sans-serif';
-          ctx.fillText('데이터가 없습니다. 감정일기를 저장해 보세요.', pad, H/2);
+        const n = vals.length;
+        if (n === 0) {
+          ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.font = '14px Nunito, sans-serif';
+          ctx.fillText('데이터가 없습니다. 감정일기를 저장해 보세요.', pad, H / 2);
           return;
         }
-        const xAt = i => pad + (W-2*pad) * (i/(Math.max(n-1,1)));
-        const yAt = v => pad + (H-2*pad) * (1 - ( (v-1) / 5 )); // 1..6
+        const xAt = i => pad + (W - 2 * pad) * (i / (Math.max(n - 1, 1)));
+        const yAt = v => pad + (H - 2 * pad) * (1 - ((v - 1) / 5)); // 1..6
 
         ctx.beginPath();
-        let started=false;
-        vals.forEach((v,i)=>{
-          if(v==null) return;
-          const x=xAt(i), y=yAt(v);
-          if(!started){ ctx.moveTo(x,y); started=true; }
-          else{ ctx.lineTo(x,y); }
+        let started = false;
+        vals.forEach((v, i) => {
+          if (v == null) return;
+          const x = xAt(i), y = yAt(v);
+          if (!started) { ctx.moveTo(x, y); started = true; }
+          else { ctx.lineTo(x, y); }
         });
-        ctx.strokeStyle='#3b7f6a'; ctx.lineWidth=2; ctx.stroke();
+        ctx.strokeStyle = '#3b7f6a'; ctx.lineWidth = 2; ctx.stroke();
 
-        // 점
-        ctx.fillStyle='#3b7f6a';
-        vals.forEach((v,i)=>{
-          if(v==null) return;
-          const x=xAt(i), y=yAt(v);
-          ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#3b7f6a';
+        vals.forEach((v, i) => {
+          if (v == null) return;
+          const x = xAt(i), y = yAt(v);
+          ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI * 2); ctx.fill();
         });
 
-        // 마지막 값 라벨
-        const lastIdx = vals.map((v,i)=>[v,i]).filter(([v])=>v!=null).pop();
-        if(lastIdx){
-          const [v,i]=lastIdx, x=xAt(i), y=yAt(v);
-          ctx.fillStyle='rgba(0,0,0,0.65)'; ctx.font='12px Nunito, sans-serif';
-          ctx.fillText(`최근: ${v.toFixed(2)}`, x+6, y-8);
+        const lastIdx = vals.map((v, i) => [v, i]).filter(([v]) => v != null).pop();
+        if (lastIdx) {
+          const [v, i] = lastIdx, x = xAt(i), y = yAt(v);
+          ctx.fillStyle = 'rgba(0,0,0,0.65)'; ctx.font = '12px Nunito, sans-serif';
+          ctx.fillText(`최근: ${v.toFixed(2)}`, x + 6, y - 8);
         }
       }
 
-      // 리사이즈 대응
-      window.addEventListener('resize', ()=>drawTrend(loadEntries()));
-
-      // 초기 로드 시 트렌드 반영
+      window.addEventListener('resize', () => drawTrend(loadEntries()));
       drawTrend(loadEntries());
     })();
   </script>
+
+  <script>
+    // 6가지 감정 라벨 (1~6 매핑)
+    const EMOTION_LABELS = {
+      1: '분노',
+      2: '슬픔',
+      3: '불안',
+      4: '상처',
+      5: '당황',
+      6: '기쁨'
+    };
+
+    // 샘플 X축(시간) 라벨 & 값(1~6 정수) — 필요 시 교체
+    const xLabels = ['10-01', '10-02', '10-03', '10-04', '10-05', '10-06', '10-07'];
+    const yValues = [3, 4, 2, 5, 4, 6, 5]; // 1~6만 사용 (0.5 등 없음)
+
+    // 차트 생성
+    const ctx = document.getElementById('emotionLine').getContext('2d');
+    const emotionLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: xLabels,
+        datasets: [{
+          label: '감정(1~6)',
+          data: yValues,
+          borderWidth: 2,
+          borderColor: '#3b7f6a',
+          backgroundColor: 'rgba(59,127,106,0.10)',
+          pointBackgroundColor: '#3b7f6a',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: false,
+          tension: 0.25
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              // 툴팁: 숫자 + 감정명 함께 표시
+              label: (ctx) => {
+                const v = ctx.parsed.y;
+                const name = EMOTION_LABELS[v] || v;
+                return `감정: ${name} (${v})`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(42,42,42,0.08)' }
+          },
+          y: {
+            min: 1,
+            max: 6,
+            ticks: {
+              stepSize: 1,
+              // 눈금에 숫자만 표시 (원하면 아래 줄을 `${EMOTION_LABELS[value]}`로 바꾸면 감정명으로 보임)
+              callback: (value) => value
+            },
+            grid: { color: 'rgba(42,42,42,0.08)' }
+          }
+        }
+      }
+    });
+
+    // (선택) 외부 데이터로 차트 갱신
+    function updateEmotionLine(x, y) {
+      // y는 반드시 1~6 정수만 사용
+      emotionLineChart.data.labels = x;
+      emotionLineChart.data.datasets[0].data = y;
+      emotionLineChart.update();
+    }
+
+    /* 사용 예시:
+    updateEmotionLine(
+      ['10-08','10-09','10-10','10-11'],
+      [2, 3, 5, 4]
+    );
+    */
+
+    // (선택) 마지막 값에 "최근: n" 표시하고 싶다면 — 아주 가볍게 커스텀 플러그인
+    const recentLabelPlugin = {
+      id: 'recentLabel',
+      afterDatasetsDraw(chart) {
+        const ds = chart.getDatasetMeta(0);
+        const last = ds?.data?.[ds.data.length - 1];
+        if (!last) return;
+        const ctx = chart.ctx;
+        const lastVal = chart.data.datasets[0].data.at(-1);
+        ctx.save();
+        ctx.font = '12px sans-serif';
+        ctx.fillStyle = '#2a2a2a';
+        ctx.fillText(`최근: ${lastVal}`, last.x + 8, last.y - 8);
+        ctx.restore();
+      }
+    };
+    emotionLineChart.config.plugins.push(recentLabelPlugin);
+    emotionLineChart.update();
+  </script>
+
+
+  <script>
+    /* ▼ 샘플 라벨과 점수 (0~1 범위) */
+    const stressLabels = [
+      '업무량', '시간 압박', '역할 모호성', '상사 갈등',
+      '동료 갈등', '보상 불만', '대상자/고객 스트레스', '워라밸 불균형'
+    ];
+    // 예시 데이터: 0~1로 정규화된 중요도/영향도
+    let stressScores = [0.78, 0.65, 0.52, 0.70, 0.40, 0.55, 0.62, 0.73];
+
+    /* ▼ 레이더 차트 생성 */
+    const ctxRadar = document.getElementById('stressRadar').getContext('2d');
+    const stressRadarChart = new Chart(ctxRadar, {
+      type: 'radar',
+      data: {
+        labels: stressLabels,
+        datasets: [{
+          label: '중요도(정규화)',
+          data: stressScores,
+          borderWidth: 2,
+          borderColor: '#3b7f6a',                 // 브랜드 그린
+          backgroundColor: 'rgba(59,127,106,0.15)',// 부드러운 채움
+          pointBackgroundColor: '#3b7f6a',
+          pointBorderColor: '#3b7f6a',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: true,
+          tension: 0.2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.label}: ${(ctx.parsed.r * 100).toFixed(0)}%`
+            }
+          }
+        },
+        scales: {
+          r: {
+            min: 0,
+            max: 1,
+            ticks: {
+              stepSize: 0.2,
+              showLabelBackdrop: false,
+              callback: (v) => `${v * 100}`
+            },
+            grid: { circular: true },
+            pointLabels: {
+              font: { size: 12 },
+              color: '#2a2a2a'
+            },
+            angleLines: { color: 'rgba(42,42,42,0.08)' },
+            grid: { color: 'rgba(42,42,42,0.08)' }
+          }
+        }
+      }
+    });
+
+    /* ▼ (선택) SHAP/LIME 등 원시 점수 → 0~1 정규화 유틸 */
+    function normalize01(values) {
+      const maxAbs = Math.max(...values.map(v => Math.abs(v))) || 1;
+      return values.map(v => Math.abs(v) / maxAbs);
+    }
+
+    /* ▼ (선택) 외부 계산값으로 차트 갱신하는 함수 */
+    function updateStressRadar(rawScores, labels = null) {
+      if (labels) stressRadarChart.data.labels = labels;
+      stressRadarChart.data.datasets[0].data = normalize01(rawScores);
+      stressRadarChart.update();
+    }
+
+    /* 사용 예시:
+    updateStressRadar([0.42, 0.88, 0.13, 0.55, 0.21, 0.47, 0.60, 0.72]);
+    */
+  </script>
+
 </body>
+
 </html>
