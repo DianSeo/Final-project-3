@@ -3,182 +3,203 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>늘봄 Nulbom – See your Mind, Heal your Day</title>
-  <!-- Optional soft, rounded font -->
+  <title>늘봄 SyMind – See your Mind, Heal your Day</title>
+  <script src="https://kit.fontawesome.com/e4013eb5f0.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* 🌿 Warm, calm palette (Canva-style tokens) */
-      --bg: #fffaf5;           /* Warm ivory */
-      --panel: #ffffff;        /* Card base */
-      --ink: #2a2a2a;          /* Text */
-      --muted: #6f6f6f;        /* Secondary text */
-      --brand: #3b7f6a;        /* Deep olive green */
-      --brand-weak: #94c7b3;   /* Pastel green */
-      --accent: #e7b186;       /* Peach beige */
-      --accent-2: #e6d9c7;     /* Sand */
-      --danger: #d66a6a;       /* For negative cues */
-      --radius: 20px;          /* Soften all corners */
-      --shadow: 0 12px 24px rgba(0,0,0,.08);
-      --shadow-soft: 0 6px 16px rgba(0,0,0,.06);
-      --maxw: 1120px;
+      --bg:#fbe5d6; --panel:#ffffff; --ink:#2a2a2a; --muted:#2a2a2a;
+      --brand:#3b7f6a; --brand-weak:#94c7b3; --accent:#e7b186; --accent-2:#e6d9c7; --danger:#d66a6a;
+      --radius:20px; --shadow:0 12px 24px rgba(14,7,7,.08); --shadow-soft:0 6px 16px rgba(0,0,0,.06); --maxw:1120px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0; font-family:"Nunito", system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      color:var(--ink); background: radial-gradient(1200px 600px at 50% -10%, #fff0e3 0%, transparent 60%), var(--bg);
-    }
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:"Nunito",system-ui,-apple-system,Segoe UI,Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; color:var(--ink);
+      background:radial-gradient(1200px 600px at 50% -10%, #fff0e3 0%, transparent 60%), var(--bg);}
     a{color:var(--brand); text-decoration:none}
     .container{max-width:var(--maxw); margin:0 auto; padding:24px}
 
-    /* Header */
-    header{
-      position:sticky; top:0; backdrop-filter:saturate(150%) blur(8px);
-      background:linear-gradient(180deg, rgba(255,250,245,.9), rgba(255,250,245,.6));
-      border-bottom:1px solid rgba(0,0,0,.04);
-      z-index:50;
-    }
+    header{position:sticky; top:0; backdrop-filter:saturate(150%) blur(8px);
+      background:linear-gradient(180deg, rgba(251,229,215,.9), rgba(255,250,245,.6)); border-bottom:1px solid rgba(0,0,0,.04); z-index:50;}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
     .logo{display:flex; align-items:center; gap:12px}
-    .logo-badge{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--brand-weak), var(--accent)); box-shadow:var(--shadow-soft); display:grid; place-items:center; font-weight:800; color:white}
+    .logo-badge{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--brand-weak), var(--accent)); box-shadow:var(--shadow-soft);
+      display:grid; place-items:center; font-weight:800; color:#fff}
     .logo h1{font-size:18px; letter-spacing:.2px; margin:0}
     .menu{display:flex; gap:20px; align-items:center}
     .menu a{padding:10px 14px; border-radius:12px; color:var(--muted)}
-    .menu a.active, .menu a:hover{background:rgba(59,127,106,.08); color:var(--brand)}
-    .avatar{width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#ddd,#fff)}
+    .menu a.active,.menu a:hover{background:rgba(59,127,106,.08); color:var(--brand)}
+    .avatar{width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg, #ddd, #fff)}
 
-    /* Hero */
     .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; margin-top:18px}
-    .hero-card{
-      background:linear-gradient(180deg, #ffffffcc, #ffffffa8), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%2394c7b3" stop-opacity="0.15"/><stop offset="1" stop-color="%23e7b186" stop-opacity="0.15"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>');
-      padding:36px; border-radius:var(--radius); box-shadow:var(--shadow);
-    }
+    .hero-card{background:linear-gradient(180deg, #ffffffcc, #ffffffa8),
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%2394c7b3" stop-opacity="0.15"/><stop offset="1" stop-color="%23e7b186" stop-opacity="0.15"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>');
+      padding:36px; border-radius:var(--radius); box-shadow:var(--shadow);}
     .hero h2{font-size:32px; line-height:1.25; margin:0 0 8px}
     .hero p{color:var(--muted); margin:0 0 16px}
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px}
+
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
     .btn{padding:12px 18px; border-radius:14px; border:1px solid transparent; font-weight:700; cursor:pointer}
     .btn-primary{background:var(--brand); color:#fff}
     .btn-primary:hover{opacity:.95}
     .btn-soft{background:rgba(59,127,106,.08); color:var(--brand)}
     .btn-ghost{background:#fff; border-color:#eee; color:var(--ink)}
 
-    .mini{
-      display:grid; gap:12px; grid-template-columns:1fr; padding:8px
-    }
-    .mini-card{background:var(--panel); border-radius:16px; padding:16px; box-shadow:var(--shadow-soft)}
+    .mini{display:grid; gap:12px; grid-template-columns:1fr; padding:8px}
+    .mini-card{background:var(--panel); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow-soft)}
 
-    /* Centered stack panels */
     .stack{display:grid; gap:18px; grid-template-columns:1fr 1fr; margin-top:18px}
     .card{background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
     .card h3{margin:0 0 8px}
     .hint{color:var(--muted); font-size:14px}
 
-    /* Emotion wheel */
     .emotions{display:flex; flex-wrap:wrap; gap:10px}
     .pill{padding:10px 14px; border-radius:999px; background:rgba(0,0,0,.04); cursor:pointer; border:1px solid transparent; transition:all .2s}
     .pill:hover{background:#fff; border-color:#eee}
-    .pill.active{background:rgba(231,177,134,.2); border-color:var(--accent);}
+    .pill.active{background:rgba(231,177,134,.2); border-color:var(--accent)}
+    .pill[aria-pressed="true"]{outline:2px solid var(--accent)}
 
-    /* Inputs */
     textarea{width:100%; min-height:120px; padding:14px 16px; border-radius:16px; border:1px solid #eee; resize:vertical; font-family:inherit; font-size:16px; background:#fff}
 
-    /* Chart placeholders */
-    .chart{height:240px; border-radius:16px; background:linear-gradient(180deg,#ffffff,#f7f4ef); border:1px solid #eee; display:grid; place-items:center; color:var(--muted)}
+    .chart{height:260px; border-radius:16px; background:linear-gradient(180deg, #ffffff, #f7f4ef); border:1px solid #eee; display:grid; place-items:center; color:var(--muted); position:relative}
+    .chart canvas{width:100%; height:100%; display:block; border-radius:16px}
 
-    /* Chatbot */
     .chat{display:flex; flex-direction:column; gap:12px; max-height:360px; overflow:auto}
     .bubble{max-width:80%; padding:12px 14px; border-radius:18px; box-shadow:var(--shadow-soft)}
-    .bot{background:linear-gradient(180deg,#f6fbf8,#ffffff); border:1px solid #e8efe9}
-    .me{background:linear-gradient(180deg,#fff,#fff); border:1px solid #eee; align-self:flex-end}
+    .bot{background:linear-gradient(180deg, #f6fbf8, #ffffff); border:1px solid #e8efe9}
+    .me{background:linear-gradient(180deg, #fff, #fff); border:1px solid #eee; align-self:flex-end}
 
-    /* Footer */
     footer{padding:36px 24px; color:var(--muted); text-align:center}
 
-    /* Responsive */
-    @media (max-width: 960px){
-      .hero{grid-template-columns:1fr}
-      .stack{grid-template-columns:1fr}
-    }
+    @media (max-width:960px){ .hero{grid-template-columns:1fr} .stack{grid-template-columns:1fr} }
+
+    /* Survey single panel */
+    .sv-card{padding:18px; border-radius:16px; background:#fff; box-shadow:var(--shadow)}
+    .sv-head{position:sticky; top:0; z-index:5; margin:-18px -18px 12px; padding:14px 18px; border-bottom:1px solid #eee;
+      background:linear-gradient(180deg, #ffffff, #fbf9f6); border-top-left-radius:16px; border-top-right-radius:16px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px}
+    .sv-body{max-height:68vh; overflow:auto; overscroll-behavior:contain; padding-right:6px; border-radius:12px}
+    .sv-q{margin:12px 0 0; padding:14px; border:1px solid #eee; border-radius:12px; background:linear-gradient(180deg, #fff, #fbf8f2)}
+    .sv-q legend{font-weight:700; margin-bottom:10px}
+    .sv-scale{display:flex; flex-wrap:wrap; gap:10px}
+    .sv-scale label{display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #eee; border-radius:999px; background:#fff; box-shadow:var(--shadow-soft)}
+    .sv-scale input{accent-color:var(--brand)}
+    .sv-actions{display:flex; gap:10px}
+    .sv-bar{width:220px; height:8px; background:#eee; border-radius:999px; overflow:hidden}
+    .sv-bar>i{display:block; height:100%; width:0%; background:var(--brand)}
+    @media (max-width:960px){ .sv-bar{width:36vw} }
+
+    .result-wrap{display:grid; place-items:center; height:240px; border:1px solid #eee; border-radius:16px; background:linear-gradient(180deg, #ffffff, #f7f4ef)}
+    .badge{display:inline-flex; align-items:center; gap:10px; padding:14px 18px; border-radius:999px; font-weight:800; letter-spacing:.2px}
+    .badge.ok{background:rgba(59,127,106,.12); color:var(--brand); border:1px solid rgba(59,127,106,.25)}
+    .badge.warn{background:rgba(214,106,106,.12); color:var(--danger); border:1px solid rgba(214,106,106,.25)}
+    .badge i{font-size:20px}
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="logo">
-        <div class="logo-badge">Nb</div>
-        <h1>늘봄 Nulbom</h1>
+        <div class="logo-badge">Nb</div><h1>늘봄 SyMind</h1>
       </div>
       <nav class="menu">
-        <a href="#" class="active">홈</a>
-        <a href="#survey">설문</a>
-        <a href="#diary">감정일기</a>
-        <a href="#chat">공감챗봇</a>
-        <a href="#dashboard">대시보드</a>
+        <a href="#" class="active" id="toHome">SyMind</a>
+        <a href="#survey" id="toSurvey">늘이 스트레스 예측진단 설문</a>
+        <a href="#diary" id="toDiary">봄이 감정진단 일기</a>
+        <a href="#chat" id="toChat">마음이 감정진단 공감봇</a>
       </nav>
       <div class="avatar" title="Profile"></div>
     </div>
   </header>
 
   <main class="container">
-    <!-- HERO: Centered healing zone -->
-    <section class="hero">
+    <!-- HERO -->
+    <section class="hero" id="home">
       <div class="hero-card">
         <h2>오늘 마음을 살피고,<br/>부드럽게 치유해요 🌿</h2>
         <p class="hint">See your Mind, Heal your Day · 스트레스 진단 · 감정일기 · 공감형 피드백</p>
         <div class="cta-row">
-          <button class="btn btn-primary">감정 진단 시작 ▶</button>
-          <button class="btn btn-soft">감정 일기 쓰기 📔</button>
-          <button class="btn btn-ghost">챗봇에게 말걸기 💬</button>
+          <button class="btn btn-primary" id="btnStartSurvey">늘이 스트레스 예측진단 시작 ▶</button>
+          <button class="btn btn-soft" id="btnOpenDiary">봄이 감정일기 쓰기 📔</button>
+          <button class="btn btn-ghost" id="btnOpenChat">마음이에게 말걸기 💬</button>
         </div>
       </div>
       <div class="mini">
-        <div class="mini-card">
-          <strong>오늘의 팁</strong>
-          <p class="hint">3분 호흡: 4초 들숨 · 4초 멈춤 · 6초 날숨</p>
+        <div class="mini-card"><strong>오늘의 팁</strong><p class="hint">3분 호흡: 4초 들숨 · 4초 멈춤 · 6초 날숨</p></div>
+        <div class="mini-card"><strong>마음 미션</strong><p class="hint">오늘 한 가지 작은 감사를 적어보세요.</p></div>
+        <div class="mini-card"><strong>리마인더</strong><p class="hint">오후 9시에 감정일기 알림 보내기</p></div>
+      </div>
+    </section>
+
+    <!-- 설문 -->
+    <section id="survey" class="sv-card" aria-labelledby="svTitle">
+      <div class="sv-head">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+          <h3 id="svTitle" style="margin:0">늘이 스트레스 설문 (39문항)</h3>
+          <div class="sv-bar"><i id="svBar"></i></div>
+          <small id="svPct">0% 완료</small>
         </div>
-        <div class="mini-card">
-          <strong>마음 미션</strong>
-          <p class="hint">오늘 한 가지 작은 감사를 적어보세요.</p>
+        <div class="sv-actions">
+          <button class="btn btn-soft" type="button" id="svSave">임시저장</button>
+          <button class="btn btn-ghost" type="button" id="svReset">초기화</button>
+          <button class="btn btn-primary" type="button" id="svSubmit">제출</button>
         </div>
-        <div class="mini-card">
-          <strong>리마인더</strong>
-          <p class="hint">오후 9시에 감정일기 알림 보내기</p>
+      </div>
+      <div class="sv-body"><form id="svForm"></form></div>
+    </section>
+
+    <!-- 설문 결과 -->
+    <section id="resultSection">
+      <div class="card" style="margin-top:12px;" aria-live="polite">
+        <h3>늘이의 스트레스 예측 결과</h3>
+        <div id="resultChart" class="result-wrap">
+          <div class="hint">아직 결과가 없습니다. 설문을 저장 또는 제출하면 결과가 표시됩니다.</div>
         </div>
       </div>
     </section>
 
-    <!-- CENTER STACK: Diary & Trends -->
+    <!-- Diary & Trends -->
     <section id="diary" class="stack">
       <div class="card">
-        <h3>감정일기 📔</h3>
-        <p class="hint">오늘의 감정을 선택하고, 떠오르는 생각을 적어보세요.</p>
-        <div class="emotions" style="margin:10px 0 14px">
-          <div class="pill active">분노 😠</div>
-          <div class="pill">슬픔 😢</div>
-          <div class="pill">불안 😟</div>
-          <div class="pill">상처 😔</div>
-          <div class="pill">당황 😳</div>
-          <div class="pill">기쁨 😊</div>
+        <h3>봄이 감정일기 📔</h3>
+        <p class="hint">오늘의 감정을 선택하고, 오늘 하루 있었던 일을 적어보세요.</p>
+
+        <!-- 이모티콘(버튼) 선택 -->
+        <div class="emotions" role="radiogroup" aria-label="오늘의 감정 선택" id="emotionGroup">
+          <button type="button" class="pill active" data-emotion="분노" aria-pressed="true">분노 😠</button>
+          <button type="button" class="pill" data-emotion="슬픔" aria-pressed="false">슬픔 😢</button>
+          <button type="button" class="pill" data-emotion="불안" aria-pressed="false">불안 😟</button>
+          <button type="button" class="pill" data-emotion="상처" aria-pressed="false">상처 😔</button>
+          <button type="button" class="pill" data-emotion="당황" aria-pressed="false">당황 😳</button>
+          <button type="button" class="pill" data-emotion="기쁨" aria-pressed="false">기쁨 😊</button>
         </div>
-        <textarea placeholder="오늘 나의 마음은 …"></textarea>
+        <input type="hidden" id="diaryEmotion" value="분노"/>
+
+        <textarea id="diaryText" placeholder="오늘 나의 마음은 …"></textarea>
+
         <div class="cta-row" style="margin-top:12px">
-          <button class="btn btn-primary">저장</button>
-          <button class="btn btn-soft">AI 감정 분석</button>
+          <button class="btn btn-primary" id="diarySaveBtn" type="button">저장</button>
+          <button class="btn btn-soft" id="aiAnalyzeBtn" type="button">AI 감정 분석</button>
+
+          <!-- 버튼 옆에 동적으로 생기는 결과 카드 -->
+          <div id="aiResultCard" class="mini-card" style="display:none;"></div>
         </div>
       </div>
 
       <div class="card">
         <h3>감정 트렌드 📈</h3>
-        <p class="hint">EWMA · LSTM 기반 주간/월간 흐름</p>
-        <div class="chart">(라인 차트 영역)</div>
+        <p class="hint">EWMA · LSTM(예정) 기반 흐름 — 현재는 EWMA 스무딩 라인</p>
+        <div class="chart" id="trendChart">
+          <canvas id="trendCanvas"></canvas>
+        </div>
       </div>
     </section>
 
-    <!-- INSIGHT: Stress factors & Feedback -->
+    <!-- 대시보드 (그 외) -->
     <section id="dashboard" class="stack">
       <div class="card">
-        <h3>상위 스트레스 요인 🔎</h3>
+        <h3>TOP 8 주요 스트레스 요인 🔎</h3>
         <p class="hint">SHAP / LIME로 설명가능성 분석</p>
         <div class="chart">(레이더 차트 영역)</div>
       </div>
@@ -196,17 +217,18 @@
       </div>
     </section>
 
-    <!-- Chatbot -->
+    <!-- Chat -->
     <section id="chat" class="stack">
       <div class="card" style="grid-column:1 / -1">
-        <h3>공감 챗봇 💬</h3>
+        <h3>마음이 공감봇 💬</h3>
         <div class="chat" aria-label="chat area">
           <div class="bubble bot">안녕하세요, 오늘 마음은 어떠세요? 🌿</div>
           <div class="bubble me">조금 불안하고 긴장돼요…</div>
           <div class="bubble bot">그 느낌을 알아차린 것만으로도 큰 걸음을 내디뎠어요. 지금 여기서 호흡을 같이 해볼까요?</div>
         </div>
         <div class="cta-row" style="margin-top:12px">
-          <input aria-label="chat input" placeholder="메시지를 입력하세요" style="flex:1; padding:12px 14px; border-radius:14px; border:1px solid #eee" />
+          <input aria-label="chat input" placeholder="메시지를 입력하세요"
+                 style="flex:1; padding:12px 14px; border-radius:14px; border:1px solid #eee"/>
           <button class="btn btn-primary">전송</button>
           <button class="btn btn-soft">감정요약</button>
           <button class="btn btn-ghost">위로말</button>
@@ -215,10 +237,305 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      © 2025 Nulbom · See your Mind, Heal your Day
-    </div>
-  </footer>
+  <footer><div class="container">© 2025 Symind · See your Mind, Heal your Day</div></footer>
+
+  <script>
+    /* ─────────────────────────────
+       설문(기존) – 그대로 유지
+    ───────────────────────────── */
+    (function () {
+      const ITEMS = [
+        '하는 일에 대해 공정한 대가를 받고 있다.', '월급 인상률이 낮고 인상 주기가 길다.', '회사가 내 가치를 낮게 본다.', '급여 인상 가능성에 만족한다.',
+        '승진 가능성이 낮습니다.', '성과가 좋은 사람은 승진 가능성이 높습니다.', '사람들은 빠르게 성장합니다.', '승진 가능성에 만족합니다.', '제 상사는 매우 유능합니다.',
+        '제 상사는 불공평합니다.', '제 상사는 직원의 감정에 관심이 없습니다.', '저는 제 상사를 좋아합니다.', '복리 혜택에 만족하지 않습니다.', '복리 혜택은 다른 조직과 비슷합니다.',
+        '복리 혜택이 공정합니다.', '복리 혜택이 없습니다.', '좋은 일을 하면 인정을 받습니다.', '제 일이 인정받지 못한다고 느낍니다', '직원들에게 보상이 거의 없습니다.',
+        '노력에 비해 보상이 부족하다고 느낍니다.', '규칙과 절차가 일하기 어렵게 만듭니다.', '관료주의가 일을 방해하지 않습니다.', '일이 너무 많습니다.', '서류작업이 많습니다.',
+        '동료들을 좋아합니다.', '동료의 무능함 때문에 더 열심히 일해야 합니다.', '동료와 함께 일하는 것이 즐겁습니다.', '직장 내 다툼이 많습니다.', '가끔 일이 무의미하게 느껴집니다.',
+        '제 일을 좋아합니다.', '제 직업에 자부심을 느낍니다.', '제 직업이 즐겁습니다.', '조직내 의사소통이 원활합니다.', '조직 목표가 불분명합니다.', '조직의 상황을 모를 때가 있습니다.',
+        '업무 지시가 불충분합니다.', '일로 인해 스트레스를 관리하기 어렵습니다.', '스트레스로 일을 즐기지 못합니다.', '스트레스로 일을 포기한 적이 있습니다.'
+      ];
+      const TOTAL = ITEMS.length;
+      const form = document.getElementById('svForm');
+      const bar = document.getElementById('svBar');
+      const pct = document.getElementById('svPct');
+      const resultChart = document.getElementById('resultChart');
+      const KEY = 'nulbom_survey_single_panel_v1';
+
+      const qs = (s) => document.querySelector(s);
+      const go = (id) => qs(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      qs('#btnStartSurvey')?.addEventListener('click', () => go('#survey'));
+      qs('#btnOpenDiary')?.addEventListener('click', () => go('#diary'));
+      qs('#btnOpenChat')?.addEventListener('click', () => go('#chat'));
+      qs('#toHome')?.addEventListener('click', (e) => { e.preventDefault(); go('#home'); });
+
+      form.innerHTML = ITEMS.map((t,i)=> {
+        const n=`q${i+1}`;
+        return `
+          <fieldset class="sv-q">
+            <legend>${i+1}. ${t}</legend>
+            <div class="sv-scale" role="radiogroup" aria-label="${i+1}번">
+              <label><input type="radio" name="${n}" value="1"> 전혀 아님</label>
+              <label><input type="radio" name="${n}" value="2"> 아님</label>
+              <label><input type="radio" name="${n}" value="3"> 중립</label>
+              <label><input type="radio" name="${n}" value="4"> 자주</label>
+              <label><input type="radio" name="${n}" value="5"> 매우 자주</label>
+            </div>
+          </fieldset>`;
+      }).join('');
+
+      function progress(){
+        const done = form.querySelectorAll('input[type="radio"]:checked').length;
+        const p = Math.round(100*done/TOTAL);
+        bar.style.width=p+'%'; pct.textContent=`${p}% 완료`;
+      }
+      form.addEventListener('change', progress);
+
+      function collect(){
+        const data={};
+        for(let i=1;i<=TOTAL;i++){
+          const r=form.querySelector(`input[name="q${i}"]:checked`);
+          data[`q${i}`]= r? +r.value : null;
+        }
+        return data;
+      }
+
+      function classify(data){
+        const vals = Object.values(data).filter(v=>v!=null);
+        if(!vals.length){ return {label:'결과 없음', stress:null, detail:'응답이 필요합니다.'}; }
+        const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
+        const stress = mean>=3.5;
+        return {label:stress?'Stress':'Non-Stress', stress, mean:Number(mean.toFixed(2)), answered:vals.length};
+      }
+
+      function renderResult(res){
+        if(!res || res.stress===null){
+          resultChart.innerHTML='<div class="hint">아직 결과가 없습니다. 설문을 저장 또는 제출하면 결과가 표시됩니다.</div>';
+          return;
+        }
+        const cls=res.stress?'warn':'ok';
+        const icon=res.stress?'<i class="fa-solid fa-triangle-exclamation"></i>':'<i class="fa-solid fa-leaf"></i>';
+        resultChart.innerHTML=`
+          <div class="badge ${cls}" title="응답 ${res.answered}문항, 평균 ${res.mean}">
+            ${icon}<span>${res.label}</span>
+          </div>`;
+      }
+
+      try{
+        const raw=localStorage.getItem(KEY);
+        if(raw){
+          const obj=JSON.parse(raw);
+          Object.entries(obj).forEach(([k,v])=>{
+            const el=form.querySelector(`input[name="${k}"][value="${v}"]`);
+            if(el) el.checked=true;
+          });
+          progress(); renderResult(classify(obj));
+        }else{ progress(); }
+      }catch(e){ progress(); }
+
+      document.getElementById('svSave').addEventListener('click', ()=>{
+        const payload=collect();
+        localStorage.setItem(KEY, JSON.stringify(payload));
+        const res=classify(payload); renderResult(res);
+        alert('임시저장 완료! 결과가 업데이트되었습니다.');
+        document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+      });
+
+      document.getElementById('svReset').addEventListener('click', ()=>{
+        if(confirm('모든 응답을 초기화할까요?')){
+          form.reset(); localStorage.removeItem(KEY); progress(); renderResult(null);
+        }
+      });
+
+      document.getElementById('svSubmit').addEventListener('click', ()=>{
+        const data=collect();
+        const miss=Object.values(data).filter(v=>v===null).length;
+        if(miss && !confirm(`미응답 ${miss}문항이 있습니다. 제출할까요?`)) return;
+        const res=classify(data); renderResult(res);
+        alert('제출 완료! 결과가 업데이트되었습니다.');
+        document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+      });
+    })();
+
+    /* ─────────────────────────────
+       🌼 감정일기 + 📈 트렌드 (신규)
+    ───────────────────────────── */
+    (function(){
+      const EMO_ORDER = ['분노','슬픔','불안','상처','당황','기쁨'];
+      const EMO_TO_NUM = { '분노':1,'슬픔':2,'불안':3,'상처':4,'당황':5,'기쁨':6 };
+      const STORAGE_KEY = 'nulbom_diary_entries_v1'; // [{date:'2025-11-06', emotion:'기쁨', text:'...'}]
+
+      const $emotionHidden = document.getElementById('diaryEmotion');
+      const $emotionGroup  = document.getElementById('emotionGroup');
+      const $diaryText     = document.getElementById('diaryText');
+      const $saveBtn       = document.getElementById('diarySaveBtn');
+      const $aiBtn         = document.getElementById('aiAnalyzeBtn');
+      const $aiCard        = document.getElementById('aiResultCard');
+
+      // 이모티콘(버튼) 선택 토글
+      $emotionGroup.querySelectorAll('.pill').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          $emotionGroup.querySelectorAll('.pill').forEach(b=>{
+            b.classList.remove('active'); b.setAttribute('aria-pressed','false');
+          });
+          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+          $emotionHidden.value = btn.dataset.emotion;
+        });
+      });
+
+      // 저장: 날짜 중복 시 갱신
+      function loadEntries(){
+        try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+        catch(e){ return []; }
+      }
+      function saveEntries(arr){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      }
+      function todayStr(){
+        const d=new Date();
+        const m=('0'+(d.getMonth()+1)).slice(-2);
+        const day=('0'+d.getDate()).slice(-2);
+        return `${d.getFullYear()}-${m}-${day}`;
+      }
+
+      $saveBtn.addEventListener('click', ()=>{
+        const emotion = $emotionHidden.value;
+        const text = ($diaryText.value || '').trim();
+        const date = todayStr();
+        if(!emotion){ alert('감정을 선택해 주세요.'); return; }
+
+        let arr = loadEntries();
+        const i = arr.findIndex(e=>e.date===date);
+        const item = { date, emotion, text };
+        if(i>=0){ arr[i]=item; } else { arr.push(item); }
+        // 최신 90개만 보관 (과도한 로컬 스토리지 방지)
+        if(arr.length>90) arr = arr.slice(arr.length-90);
+        saveEntries(arr);
+
+        drawTrend(arr);
+        alert('감정일기를 저장했어요.');
+      });
+
+      // AI 감정 진단(간단 키워드 규칙, 없으면 현재 선택 사용)
+      function aiPredictEmotion(txt, fallback){
+        const t = (txt||'').toLowerCase();
+        const has = (kws)=>kws.some(k=>t.includes(k));
+        // 한글 키워드
+        if(/기쁘|행복|설렘|즐겁/.test(txt)) return '기쁨';
+        if(/불안|걱정|초조|긴장/.test(txt)) return '불안';
+        if(/분노|화나|짜증|열받/.test(txt)) return '분노';
+        if(/상처|속상|서운|섭섭/.test(txt)) return '상처';
+        if(/당황|황당|멘붕|어쩔/.test(txt)) return '당황';
+        if(/슬픔|슬프|우울|눈물/.test(txt)) return '슬픔';
+        // 영어(혹시 입력)
+        if(has(['happy','joy'])) return '기쁨';
+        if(has(['anxious','worry','nervous'])) return '불안';
+        if(has(['angry','rage'])) return '분노';
+        if(has(['hurt','wounded'])) return '상처';
+        if(has(['embarrass','confus'])) return '당황';
+        if(has(['sad','depress','blue'])) return '슬픔';
+        return fallback || '기쁨';
+      }
+
+      $aiBtn.addEventListener('click', ()=>{
+        const pick = aiPredictEmotion($diaryText.value, $emotionHidden.value);
+        $aiCard.style.display='inline-block';
+        $aiCard.innerHTML = `
+          <strong>AI 예측:</strong>
+          <div style="display:inline-flex; align-items:center; gap:8px; margin-left:6px">
+            <span class="pill active" aria-pressed="true" style="cursor:default">${pick} ${emoIcon(pick)}</span>
+          </div>`;
+      });
+
+      function emoIcon(e){
+        return ({'분노':'😠','슬픔':'😢','불안':'😟','상처':'😔','당황':'😳','기쁨':'😊'})[e] || '🙂';
+      }
+
+      /* ── 라인 차트: 최근 30개, EWMA(α=0.4) 스무딩 ── */
+      const $canvas = document.getElementById('trendCanvas');
+      const ctx = $canvas.getContext('2d');
+
+      function getSize(){
+        const box = document.getElementById('trendChart').getBoundingClientRect();
+        $canvas.width = Math.floor(box.width - 24);
+        $canvas.height = Math.floor(box.height - 16);
+      }
+
+      function ewma(arr, alpha=0.4){
+        const out=[]; let s=null;
+        for(const v of arr){
+          if(v==null){ out.push(s); continue; }
+          s = (s==null)? v : (alpha*v + (1-alpha)*s);
+          out.push(s);
+        }
+        return out;
+      }
+
+      function drawTrend(entries){
+        if(!ctx) return;
+        getSize();
+        // 정렬(오래된→최신)
+        const data = (entries||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+        const last = data.slice(-30); // 최근 30개
+        const labels = last.map(d=>d.date.slice(5)); // MM-DD
+        const rawVals = last.map(d=> EMO_TO_NUM[d.emotion] ?? null);
+        const vals = ewma(rawVals);
+
+        // 좌표계
+        const W=$canvas.width, H=$canvas.height, pad=28;
+        ctx.clearRect(0,0,W,H);
+
+        // 그리드 & 축
+        ctx.strokeStyle='rgba(0,0,0,0.08)'; ctx.lineWidth=1;
+        for(let y=1;y<=6;y++){
+          const py = pad + (H-2*pad)*(1 - (y-1)/5); // 1~6 균등
+          ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(W-pad, py); ctx.stroke();
+          ctx.fillStyle='rgba(0,0,0,0.45)'; ctx.font='12px Nunito, sans-serif';
+          ctx.fillText(String(y), 8, py+4);
+        }
+
+        // 라인
+        const n=vals.length;
+        if(n===0){ 
+          ctx.fillStyle='rgba(0,0,0,0.45)'; ctx.font='14px Nunito, sans-serif';
+          ctx.fillText('데이터가 없습니다. 감정일기를 저장해 보세요.', pad, H/2);
+          return;
+        }
+        const xAt = i => pad + (W-2*pad) * (i/(Math.max(n-1,1)));
+        const yAt = v => pad + (H-2*pad) * (1 - ( (v-1) / 5 )); // 1..6
+
+        ctx.beginPath();
+        let started=false;
+        vals.forEach((v,i)=>{
+          if(v==null) return;
+          const x=xAt(i), y=yAt(v);
+          if(!started){ ctx.moveTo(x,y); started=true; }
+          else{ ctx.lineTo(x,y); }
+        });
+        ctx.strokeStyle='#3b7f6a'; ctx.lineWidth=2; ctx.stroke();
+
+        // 점
+        ctx.fillStyle='#3b7f6a';
+        vals.forEach((v,i)=>{
+          if(v==null) return;
+          const x=xAt(i), y=yAt(v);
+          ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill();
+        });
+
+        // 마지막 값 라벨
+        const lastIdx = vals.map((v,i)=>[v,i]).filter(([v])=>v!=null).pop();
+        if(lastIdx){
+          const [v,i]=lastIdx, x=xAt(i), y=yAt(v);
+          ctx.fillStyle='rgba(0,0,0,0.65)'; ctx.font='12px Nunito, sans-serif';
+          ctx.fillText(`최근: ${v.toFixed(2)}`, x+6, y-8);
+        }
+      }
+
+      // 리사이즈 대응
+      window.addEventListener('resize', ()=>drawTrend(loadEntries()));
+
+      // 초기 로드 시 트렌드 반영
+      drawTrend(loadEntries());
+    })();
+  </script>
 </body>
 </html>
