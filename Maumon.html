@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>마음온</title>
+  <style>
+    /* 전체 기본 스타일 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      background: #fbe5d6;
+      /* 마음온 아이보리톤 */
+      color: #333;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 24px 32px 40px;
+      background: #fffdf8;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 상단 헤더 */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* 가로 가운데 정렬 */
+      margin-bottom: 24px;
+    }
+
+    .logo-img {
+      height: 150px;
+      display: block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      padding: 0;
+      margin-top: 0px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #444;
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    nav a.highlight {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #3b7f6a;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* =========================
+       메인 히어로 : 왼쪽 카드 + 오른쪽 캐릭터 2×2
+       ========================= */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    /* 왼쪽 메인 카드 */
+    .hero-left {
+      background: #ffe7d2;
+      border-radius: 24px;
+      padding: 32px 32px 36px;
+      border: 1px solid #f5cfad;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-left h1 {
+      font-size: 30px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      color: #333;ㅇ
+    }
+
+    .hero-left h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+
+    /* See your Mind, Heal your Day */
+    .hero-left .sub {
+      font-size: 30px; 
+      font-weight: 600;
+      color: #3b7f6a;
+      margin-bottom: 20px;
+    }
+
+    .hero-left .cta {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* 오른쪽: 캐릭터 2×2 카드 박스 */
+    .hero-right {
+      background: #fdf1e6;
+      border-radius: 24px;
+      padding: 20px 22px 24px;
+      border: 1px solid #f5cfad;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    /* 오늘 하루, 마음온 캐릭터들과 함께 관리해요 */
+    .hero-right-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #444;
+      text-align: center;
+    }
+
+    .hero-subtext {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .character-grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .character-big-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px 12px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f2d1b7;
+      text-align: center;
+    }
+
+    .character-big-img {
+      width: 90px;
+      /* 캐릭터 크기 */
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .character-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #333;
+    }
+
+    .character-role {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .character-desc {
+      font-size: 17px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* 반응형: 좁은 화면에서 1열로 */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- 상단 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="images/logo_transparent_new.png" alt="마음온 로고" class="logo-img">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">온설 직무스트레스 예측·진단</a></li>
+          <li><a href="#">온화 스트레스 요인 시각화</a></li>
+          <li><a href="#">온기 감정 일기</a></li>
+          <li><a href="#">온담 공감봇</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 메인 히어로 섹션 : 왼쪽 메인카드 + 오른쪽 2×2 캐릭터 -->
+    <section class="hero">
+
+      <!-- 왼쪽 메인 카드 -->
+      <div class="hero-left">
+
+        <h1>오늘의 마음을 살피고,<br>부드럽게 치유해요 🌱</h1>
+
+        <h2>
+          직무스트레스 진단, 스트레스 요인 분석,<br>
+          감정 일기 기록과 공감 챗봇까지<br>
+          하루의 마음을 돌보는 <b>마음온</b>입니다.
+        </h2>
+
+        <div class="sub">
+          See your Mind, Heal your Day
+        </div>
+
+      </div>
+
+      <!-- 오른쪽 캐릭터 2×2 카드 -->
+      <div class="hero-right">
+        <div class="hero-right-title">오늘 하루, 마음온 캐릭터들과 함께 관리해요</div>
+
+        <div class="character-grid-2x2">
+
+          <div class="character-big-card">
+            <img src="images/onsol_character_transparent.png" class="character-big-img" alt="온설">
+            <h4 class="character-name">온설 (Onseol)</h4>
+            <p class="character-role">직무스트레스 예측·진단</p>
+            <p class="character-desc">
+              직무스트레스 설문으로<br>
+              오늘의 스트레스를 진단해요.
+            </p>
+          </div>
+
+          <div class="character-big-card">
+            <img src="images/onhwa_character_transparent_floodfill.png" class="character-big-img" alt="온화">
+            <h4 class="character-name">온화 (Onhwa)</h4>
+            <p class="character-role">스트레스 요인 시각화</p>
+            <p class="character-desc">
+              설문 결과를 분석하고<br>
+              스트레스 요인을 시각화해 줘요.
+            </p>
+          </div>
+
+          <div class="character-big-card">
+            <img src="images/ongi_character_transparent.png" class="character-big-img" alt="온기">
+            <h4 class="character-name">온기 (Ongi)</h4>
+            <p class="character-role">감정 일기</p>
+            <p class="character-desc">
+              감정을 태그하고<br>
+              하루의 온기를 기록해요.
+            </p>
+          </div>
+
+          <div class="character-big-card">
+            <img src="images/ondam_character_transparent.png" class="character-big-img" alt="온담">
+            <h4 class="character-name">온담 (Ondam)</h4>
+            <p class="character-role">공감형 챗봇</p>
+            <p class="character-desc">
+              힘든 마음을 들어주고<br>
+              공감과 위로를 건네는 챗봇이에요.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+
+</html>
