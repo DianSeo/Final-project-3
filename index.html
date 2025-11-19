@@ -273,8 +273,9 @@
 
     .close-btn {
       position: absolute;
-      top: -50px;
-      right: 0;
+      top: 16px;
+      /* 🔴 여기! -50px → 16px 로 변경 */
+      right: 16px;
       background: #fff;
       padding: 8px 16px;
       border-radius: 8px;
@@ -429,6 +430,15 @@
     video.onended = () => {
       overlay.style.display = "none";
     };
+
+    // 배경(검은 부분) 클릭 시 닫기
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {   // 영상 말고 뒤 배경을 눌렀을 때만
+        video.pause();
+        overlay.style.display = "none";
+      }
+    });
+
   </script>
 
 </body>
