@@ -50,11 +50,71 @@
       margin-top: 0px;
     }
 
+    /* 공통 버튼 스타일 */
     nav ul li a {
-      text-decoration: none;
-      color: #000;
-      font-size: 30px;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 22px;
       font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    /* 온설 버튼 */
+    nav ul li a.onsol {
+      background: #ff8c00;
+      border: 2px solid #ff8c00;
+      color: #ffffff;
+    }
+
+    nav ul li a.onsol:hover {
+      background: #ffffff;
+      color: #ff8c00;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px rgba(126, 200, 227, 0.3);
+    }
+
+    /* 온화 버튼 */
+    nav ul li a.onhwa {
+      background: #ffd700;
+      border: 2px solid #ffd700;
+      color: #ffffff;
+    }
+
+    nav ul li a.onhwa:hover {
+      background: #ffffff;
+      color: #ffd700;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px rgba(59, 127, 106, 0.3);
+    }
+
+    /* 온기 버튼 */
+    nav ul li a.ongi {
+      background: #adff2f;
+      border: 2px solid #adff2f;
+      color: #ffffff;
+    }
+
+    nav ul li a.ongi:hover {
+      background: #ffffff;
+      color: #adff2f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px rgba(242, 166, 90, 0.3);
+    }
+
+    /* 온담 버튼 */
+    nav ul li a.ondam {
+      background: #00dfff;
+      border: 2px solid #00dfff;
+      color: #ffffff;
+    }
+
+    nav ul li a.ondam:hover {
+      background: #ffffff;
+      color: #00dfff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px rgba(165, 147, 224, 0.3);
     }
 
     .heal {
@@ -71,7 +131,7 @@
       font-weight: 600;
     }
 
-    /* ========================= 메인 히어로 : 왼쪽 카드 + 오른쪽 캐릭터 2×2 ========================= */
+    /* ========================= 메인 히어로 : 왼쪽 카드 + 오른쪽 캐릭터 ========================= */
     .hero {
       display: flex;
       flex-direction: column;
@@ -113,7 +173,7 @@
       flex-wrap: wrap;
     }
 
-    /* 오른쪽: 캐릭터 2×2 카드 박스 */
+    /* 오른쪽: 캐릭터 카드 박스 */
     .hero-right {
       border-radius: 24px;
       padding: 20px 22px 24px;
@@ -268,12 +328,13 @@
           class="logo-img">
       </div>
 
+      <!-- 🔹 네비게이션: ul 추가 + id를 JS와 맞게 설정 -->
       <nav>
         <ul>
-          <li><a href="#" id="nav-onseol">온설 직무스트레스 예측·진단</a></li>
-          <li><a href="#" id="nav-onhwa">온화 스트레스 요인 시각화</a></li>
-          <li><a href="#" id="nav-ongi">온기 감정 일기</a></li>
-          <li><a href="#" id="nav-ondam">온담 공감봇</a></li>
+          <li><a href="#" class="onsol" id="nav-onseol">온설 직무스트레스 예측·진단</a></li>
+          <li><a href="#" class="onhwa" id="nav-onhwa">온화 스트레스 요인 시각화</a></li>
+          <li><a href="#" class="ongi" id="nav-ongi">온기 감정 일기</a></li>
+          <li><a href="#" class="ondam" id="nav-ondam">온담 공감봇</a></li>
         </ul>
       </nav>
     </header>
@@ -332,6 +393,7 @@
     </section>
   </div>
 
+  <!-- 🔥 동영상 오버레이 -->
   <div id="videoOverlay" class="overlay">
     <div class="overlay-content">
       <video id="navVideo" controls></video>
@@ -349,6 +411,7 @@
       video.src = src;
       video.load();
       overlay.style.display = "flex";
+      video.play(); // 🎬 실제 재생
     }
 
     closeBtn.addEventListener("click", () => {
