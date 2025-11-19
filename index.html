@@ -59,10 +59,8 @@
 
     .heal {
       color: #b22222;
-      /* 원하는 색상으로 바꿔 */
       font-size: 40px;
       font-weight: 700;
-      /* 선택: 강조하고 싶을 때 */
     }
 
     nav a.highlight {
@@ -77,7 +75,6 @@
     .hero {
       display: flex;
       flex-direction: column;
-      /* 위아래 배치 */
       gap: 28px;
     }
 
@@ -102,7 +99,6 @@
       margin-bottom: 12px;
     }
 
-    /* See your Mind, Heal your Day */
     .hero-left .sub {
       font-size: 25px;
       font-weight: 600;
@@ -123,7 +119,6 @@
       padding: 20px 22px 24px;
     }
 
-    /* 오늘 하루, 마음온 캐릭터들과 함께 관리해요 */
     .hero-right-title {
       font-size: 20px;
       font-weight: 600;
@@ -141,80 +136,45 @@
 
     .character-grid-2x2 {
       display: flex;
-      /* 가로 일렬 */
       justify-content: center;
-      /* 가운데 정렬 */
       gap: 20px;
-      /* 카드 간 간격 */
       flex-wrap: nowrap;
-      /* 한 줄 유지 */
+    }
+
+    .character-big-card,
+    .character-big-card-1,
+    .character-big-card-2,
+    .character-big-card-3 {
+      border-radius: 18px;
+      padding: 18px 12px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f2d1b7;
+      text-align: center;
+      width: 230px;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .character-big-card {
       background: #ff8c00;
-      border-radius: 18px;
-      padding: 18px 12px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f2d1b7;
-      text-align: center;
-
-      width: 230px;
-      /* 카드 가로폭 통일 */
-      min-height: 340px;
-      /* 카드 세로 최소 높이 통일 */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
     }
 
     .character-big-card-1 {
       background: #ffd700;
-      border-radius: 18px;
-      padding: 18px 12px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f2d1b7;
-      text-align: center;
-
-      width: 230px;
-      min-height: 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
     }
 
     .character-big-card-2 {
       background: #adff2f;
-      border-radius: 18px;
-      padding: 18px 12px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f2d1b7;
-      text-align: center;
-
-      width: 230px;
-      min-height: 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
     }
 
     .character-big-card-3 {
       background: #00dfff;
-      border-radius: 18px;
-      padding: 18px 12px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f2d1b7;
-      text-align: center;
-
-      width: 230px;
-      min-height: 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
     }
 
     .character-big-img {
       width: 150px;
-      /* 캐릭터 크기 */
       height: auto;
       display: block;
       margin: 0 auto 10px;
@@ -248,11 +208,9 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.75);
       display: none;
-      /* 처음엔 숨김 */
       justify-content: center;
       align-items: center;
       backdrop-filter: blur(3px);
-      /* 배경 블러 */
       z-index: 9999;
     }
 
@@ -263,18 +221,14 @@
 
     .overlay video {
       width: 100vw;
-      /* 화면 전체 너비 */
       height: 100vh;
-      /* 화면 전체 높이 */
       object-fit: contain;
-      /* 비율 유지하며 꽉 채우기 */
       border-radius: 0;
     }
 
     .close-btn {
       position: absolute;
       top: 16px;
-      /* 🔴 여기! -50px → 16px 로 변경 */
       right: 16px;
       background: #fff;
       padding: 8px 16px;
@@ -285,7 +239,6 @@
       font-weight: 600;
     }
 
-    /* 반응형: 좁은 화면에서 1열로 */
     @media (max-width: 900px) {
       .hero {
         flex-direction: column;
@@ -308,10 +261,10 @@
 </head>
 
 <body>
-  <div class="page"> <!-- 상단 헤더 -->
+  <div class="page">
     <header>
       <div class="logo">
-        <img src="../images/logo_transparent_new.png" alt="마음온 로고" class="logo-img">
+        <img src="images/logo_transparent_new.png" alt="마음온 로고" class="logo-img">
       </div>
 
       <nav>
@@ -324,21 +277,18 @@
       </nav>
     </header>
 
-    <!-- 메인 히어로 섹션 : 왼쪽 메인카드 + 오른쪽 2×2 캐릭터 -->
     <section class="hero">
-      <!-- 왼쪽 메인 카드 -->
       <div class="hero-left">
         <h1>오늘의 마음을 살피고, <span class="heal">부드럽게 치유해요</span> 🌱</h1>
         <div class="sub"> See your Mind, Heal your Day </div>
       </div>
 
-      <!-- 오른쪽 캐릭터 2×2 카드 -->
       <div class="hero-right">
         <div class="hero-right-title">오늘 하루, 마음온 캐릭터들과 함께 관리해요</div>
 
         <div class="character-grid-2x2">
           <div class="character-big-card">
-            <img src="../images/onsol_character_transparent.png" class="character-big-img" alt="온설">
+            <img src="images/onsol_character_transparent.png" class="character-big-img" alt="온설">
             <h4 class="character-name">온설 (Onseol)</h4>
             <p class="character-role">직무스트레스 예측·진단</p>
             <p class="character-desc">
@@ -347,7 +297,7 @@
           </div>
 
           <div class="character-big-card-1">
-            <img src="../images/onhwa_character_transparent_floodfill.png" class="character-big-img" alt="온화">
+            <img src="images/onhwa_character_transparent_floodfill.png" class="character-big-img" alt="온화">
             <h4 class="character-name">온화 (Onhwa)</h4>
             <p class="character-role">스트레스 요인 시각화</p>
             <p class="character-desc">
@@ -356,7 +306,7 @@
           </div>
 
           <div class="character-big-card-2">
-            <img src="../images/ongi_character_transparent.png" class="character-big-img" alt="온기">
+            <img src="images/ongi_character_transparent.png" class="character-big-img" alt="온기">
             <h4 class="character-name">온기 (Ongi)</h4>
             <p class="character-role">감정 일기</p>
             <p class="character-desc">
@@ -365,7 +315,7 @@
           </div>
 
           <div class="character-big-card-3">
-            <img src="../images/ondam_character_transparent.png" class="character-big-img" alt="온담">
+            <img src="images/ondam_character_transparent.png" class="character-big-img" alt="온담">
             <h4 class="character-name">온담 (Ondam)</h4>
             <p class="character-role">공감형 챗봇</p>
             <p class="character-desc">
@@ -377,7 +327,6 @@
     </section>
   </div>
 
-  <!-- 🔥 전체 화면 영상 오버레이 -->
   <div id="videoOverlay" class="overlay">
     <div class="overlay-content">
       <video id="navVideo" controls></video>
@@ -385,7 +334,6 @@
     </div>
   </div>
 
-  <!-- 🔥 네비 클릭 → alert → 영상 팝업 재생 -->
   <script>
     const overlay = document.getElementById("videoOverlay");
     const video = document.getElementById("navVideo");
@@ -431,17 +379,13 @@
       overlay.style.display = "none";
     };
 
-    // 배경(검은 부분) 클릭 시 닫기
     overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) {   // 영상 말고 뒤 배경을 눌렀을 때만
+      if (e.target === overlay) {
         video.pause();
         overlay.style.display = "none";
       }
     });
-
   </script>
-
 </body>
-
 
 </html>
